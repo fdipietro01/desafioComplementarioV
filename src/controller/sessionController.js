@@ -20,6 +20,10 @@ class SessionControler {
       const token = generateToken(user);
       req.logger.info(`tokenEnLogin: ${token}`);
       if (!token) res.status(400).send({ message: "Error al loguear" });
+
+      const conectionTime = new Date().toLocaleString();
+      await Session.updateLastConection(email, conectionTime);
+      user.ultimaConexion = conectionTime;
       res
         .cookie("cookieTest", "texto", {
           maxAge: 60 * 60 * 1000,
@@ -194,7 +198,6 @@ class SessionControler {
       if (dbUser === null || dbUser === undefined)
         return res.status(400).send({ message: "No existe el usuario" });
       const user = new CurrentUserDto(dbUser);
-      console.log({ user });
       res.status(200).send({ message: "Usuario actual encontrado", user });
     } catch (err) {
       req.logger.error(err.message);

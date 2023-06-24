@@ -41,6 +41,18 @@ class UserManager {
       throw new Error("Error al actualizar credenciales de usuario", err);
     }
   }
+  async updateLastConection(email, lastConection) {
+    try {
+      const updated = await this.model.findOneAndUpdate(
+        { email },
+        { ultimaConexion: lastConection },
+        { new: true }
+      );
+      return updated;
+    } catch (err) {
+      throw new Error("Error al actualizar ultima conexión del usuario", err);
+    }
+  }
   async updateUserRole(uid, role) {
     try {
       const updated = await this.model.findOneAndUpdate(

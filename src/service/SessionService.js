@@ -18,6 +18,10 @@ class UserService {
     const response = await this.dao.updateUser(email, password);
     return response;
   }
+  async updateLastConection(email, lastConection) {
+    const response = await this.dao.updateLastConection(email, lastConection);
+    return response;
+  }
 }
 
 module.exports = UserService;

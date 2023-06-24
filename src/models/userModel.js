@@ -40,6 +40,17 @@ const userSchema = Schema({
   },
   carrito: { type: Schema.Types.ObjectId, ref: "carritos" },
   ticket: { type: Schema.Types.ObjectId, ref: "ticket" },
+  documents: {
+    type: [
+      {
+        nombre: { type: String },
+        referencia: { type: String },
+      },
+    ],
+  },
+  ultimaConexion: {
+    type: String,
+  },
 });
 
 userSchema.plugin(mongoosePaginate);
