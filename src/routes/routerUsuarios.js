@@ -18,6 +18,13 @@ routerUsuarios.put(
 );
 
 routerUsuarios.put(
+  "/:uid/documents",
+  passportAutenticate("current"),
+  passportAuthorize(["User", "Premium"]),
+  usersController.toogleUserRole
+);
+
+routerUsuarios.put(
   "/:uid/:cid",
   passportAutenticate("current"),
   usersController.updateUserCart
